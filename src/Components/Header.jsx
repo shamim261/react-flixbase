@@ -1,26 +1,36 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logoNormal from '../assets/img/logo-transparent.png';
 import logoDarkMode from '../assets/img/logo-white.png';
 
 export default function Header() {
     const [mobileNav, setMobileNav] = useState(false);
-    console.log(mobileNav);
+    const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem('darkmode')) || false);
+
+    useEffect(() => {
+        localStorage.setItem('darkmode', JSON.stringify(darkMode));
+
+        if (darkMode) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }, [darkMode]);
 
     return (
         <header>
-            <nav className="bg-white border-gray-200 dark:bg-gray-900">
+            <nav className="bg-white border-gray-200 dark:bg-gray-900 border-b dark:border-b-gray-600">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                    <Link to="https://flowbite.com/" className="flex items-center">
+                    <Link to="#" className="flex items-center">
                         <img
                             src={logoNormal}
                             className="w-32 block dark:hidden"
-                            alt="Flowbite Logo"
+                            alt="FlixBase Logo"
                         />
                         <img
                             src={logoDarkMode}
                             className="w-32 hidden dark:block"
-                            alt="Flowbite Logo"
+                            alt="FlixBase Logo"
                         />
                     </Link>
 
@@ -28,13 +38,14 @@ export default function Header() {
                         {/* Dark mode Toogle button */}
 
                         <button
+                            onClick={() => setDarkMode(!darkMode)}
                             id="theme-toggle"
                             type="button"
-                            className="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
+                            className="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm mr-3 p-2.5"
                         >
                             <svg
                                 id="theme-toggle-dark-icon"
-                                className="hidden w-5 h-5"
+                                className={`${darkMode ? 'hidden' : ''} w-5 h-5`}
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +54,7 @@ export default function Header() {
                             </svg>
                             <svg
                                 id="theme-toggle-light-icon"
-                                className=" w-5 h-5"
+                                className={`${darkMode ? '' : 'hidden'} w-5 h-5`}
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -167,7 +178,7 @@ export default function Header() {
                             <li>
                                 <Link
                                     to="#"
-                                    className="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
+                                    className=" block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
                                     aria-current="page"
                                 >
                                     Home
