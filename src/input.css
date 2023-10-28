@@ -5,5 +5,12 @@
 main {
     max-width: 1280px;
     margin: auto;
-    height: 80vh;
+    height: 90vh;
+    padding: 10px;
+}
+
+@layer components {
+    .activated {
+        @apply text-blue-700;
+    }
 }
