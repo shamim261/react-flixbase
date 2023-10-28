@@ -13,6 +13,30 @@ module.exports = {
     settings: { react: { version: '18.2' } },
     plugins: ['react-refresh'],
     rules: {
+        'no-return-assign': 0,
+        'react/jsx-no-constructed-context-values': 0,
+        'jsx-a11y/mouse-events-have-key-events': 0,
+        'react/prefer-stateless-function': 0,
+        'react/button-has-type ': 0,
+        'class-methods-use-this': 0,
+        'no-lone-blocks': 0,
+        'react/sort-comp': 0,
+        'react/react-in-jsx-scope': 0,
+        'react-hooks/rules-of-hooks': 'error',
+        'no-console': 0,
+        'react/state-in-constructor': 0,
+        indent: 0,
+        'linebreak-style': 0,
+        'react/prop-types': 0,
+        'jsx-a11y/click-events-have-key-events': 0,
+        'react/jsx-filename-extension': [
+            1,
+            {
+                extensions: ['.js', '.jsx'],
+            },
+        ],
+        'react/prop-types': 0,
         'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+        
     },
 };

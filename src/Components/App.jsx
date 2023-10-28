@@ -12,7 +12,7 @@ export default function App() {
         <BrowserRouter>
             <Layout>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Home apiPath="movie/now_playing" />} />
                     <Route path="/movies" element={<Movies />} />
                     <Route path="/popular" element={<Popular />} />
                     <Route path="/search/:q" element={<Search />} />
