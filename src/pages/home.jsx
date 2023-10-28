@@ -1,3 +1,5 @@
+import MovieList from '../Components/MovieList';
+
 export default function Home() {
-    return <div>Home</div>;
+    return <MovieList />;
 }
