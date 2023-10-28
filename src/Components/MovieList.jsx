@@ -7,7 +7,7 @@ export default function MovieList({ apiPath }) {
         'Loading...'
     ) : (
         <section>
-            <div className="m-3 flex  justify-start flex-wrap">
+            <div className="m-3 flex justify-center flex-wrap">
                 {movies.map((movie) => (
                     <Card key={movie.id} data={movie} />
                 ))}
