@@ -1,3 +1,5 @@
-export default function TvSeries() {
-    return <div>TvSeries</div>;
+import TVSList from '../Components/TVSList';
+
+export default function TvSeries({ apiPath }) {
+    return <TVSList apiPath={apiPath} />;
 }

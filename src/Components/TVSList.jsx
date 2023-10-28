@@ -1,6 +1,6 @@
 import useAxios from '../hooks/useAxios';
-import Card from './Card';
-export default function MovieList({ apiPath }) {
+import TVSCard from './TVCard';
+export default function TVSList({ apiPath }) {
     const { movies, loading } = useAxios(apiPath);
 
     return loading ? (
@@ -9,7 +9,7 @@ export default function MovieList({ apiPath }) {
         <section>
             <div className="m-3 flex  justify-start flex-wrap">
                 {movies.map((movie) => (
-                    <Card key={movie.id} data={movie} />
+                    <TVSCard key={movie.id} data={movie} />
                 ))}
             </div>
         </section>

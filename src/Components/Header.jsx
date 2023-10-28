@@ -196,16 +196,6 @@ export default function Header() {
 
                             <li>
                                 <NavLink
-                                    to="/movies"
-                                    className={({ isActive }) =>
-                                        isActive ? activeClass : inActiveClass
-                                    }
-                                >
-                                    Movies
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
                                     to="/popular"
                                     className={({ isActive }) =>
                                         isActive ? activeClass : inActiveClass
@@ -222,6 +212,16 @@ export default function Header() {
                                     }
                                 >
                                     TV Shows
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
+                                    to="/upcoming"
+                                    className={({ isActive }) =>
+                                        isActive ? activeClass : inActiveClass
+                                    }
+                                >
+                                    Upcoming
                                 </NavLink>
                             </li>
                         </ul>
