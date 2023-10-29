@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import dummy from '../assets//img/dummy.jpg';
+import useTitle from '../hooks/useTitle';
 export default function MovieDetails() {
     const [details, setDetails] = useState([]);
     const { id } = useParams();
@@ -51,6 +52,8 @@ export default function MovieDetails() {
         vote_count,
     } = details;
     const poster_url = poster_path ? `https://image.tmdb.org/t/p/w500/${poster_path}` : dummy;
+
+    useTitle(original_title);
 
     return loading ? (
         <div className="dark:text-slate-200 text-xl text-center ">Loading... </div>
