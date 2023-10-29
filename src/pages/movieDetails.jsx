@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import dummy from '../assets//img/dummy.jpg';
 export default function MovieDetails() {
     const [details, setDetails] = useState([]);
@@ -108,7 +108,15 @@ export default function MovieDetails() {
                     <span className="font-bold">Relase Date : </span> {release_date}
                 </p>
                 <p className="text-lg mt-2 dark:text-slate-200">
-                    <span className="font-bold">IMDB Code : </span> {imdb_id}
+                    <span className="font-bold ">IMDB Code : </span>{' '}
+                    <Link
+                        target="_blank"
+                        rel="noreferrer"
+                        className="hover:underline"
+                        to={`https://www.imdb.com/title/${imdb_id}`}
+                    >
+                        {imdb_id}
+                    </Link>
                 </p>
             </div>
         </section>
