@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-export default function useAxios(apiPath) {
+export default function useAxios(apiPath, queryStr = '') {
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const apiUrl = `https://api.themoviedb.org/3/${apiPath}?api_key=${
         import.meta.env.VITE_TMBD_API_KEY
-    }`;
+    }&query=${queryStr}`;
     useEffect(() => {
         async function getMovies() {
             setLoading(true);

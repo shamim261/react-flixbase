@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import logoNormal from '../assets/img/logo-transparent.png';
 import logoDarkMode from '../assets/img/logo-white.png';
 
@@ -22,14 +22,24 @@ export default function Header() {
         }
     }, [darkMode]);
 
+    const navigate = useNavigate();
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        const queryStr = e.target.search.value;
+        e.target.reset();
+
+        return navigate(`/search?q=${queryStr}`);
+    }
+
     return (
         <header>
             <nav
                 id="main-nav"
-                className="bg-white border-gray-200 dark:bg-gray-900 border-b dark:border-b-gray-600"
+                className="bg-white p-4 border-gray-200 dark:bg-gray-900 border-b dark:border-b-gray-600"
             >
-                <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                    <NavLink to="#" className="flex items-center">
+                <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
+                    <NavLink to="/" className="flex items-center">
                         <img
                             src={logoNormal}
                             className="w-32 block dark:hidden"
@@ -118,12 +128,15 @@ export default function Header() {
                                 </svg>
                                 <span className="sr-only">Search icon</span>
                             </div>
-                            <input
-                                type="text"
-                                id="search-navbar"
-                                className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Search..."
-                            />
+                            <form onSubmit={handleSubmit}>
+                                <input
+                                    type="text"
+                                    id="search-navbar"
+                                    name="search"
+                                    className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Search..."
+                                />
+                            </form>
                         </div>
                         <button
                             onClick={() => setMobileNav(!mobileNav)}
@@ -175,12 +188,15 @@ export default function Header() {
                                     />
                                 </svg>
                             </div>
-                            <input
-                                type="text"
-                                id="search-navbar"
-                                className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Search..."
-                            />
+                            <form onSubmit={handleSubmit}>
+                                <input
+                                    type="text"
+                                    id="search-navbar"
+                                    name="search"
+                                    className="block w-full p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Search..."
+                                />
+                            </form>
                         </div>
                         <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                             <li>
@@ -196,22 +212,22 @@ export default function Header() {
 
                             <li>
                                 <NavLink
+                                    to="/top-rated"
+                                    className={({ isActive }) =>
+                                        isActive ? activeClass : inActiveClass
+                                    }
+                                >
+                                    Top Rated
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink
                                     to="/popular"
                                     className={({ isActive }) =>
                                         isActive ? activeClass : inActiveClass
                                     }
                                 >
                                     Popular
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
-                                    to="/tv-shows"
-                                    className={({ isActive }) =>
-                                        isActive ? activeClass : inActiveClass
-                                    }
-                                >
-                                    TV Shows
                                 </NavLink>
                             </li>
                             <li>

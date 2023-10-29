@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import dummy from '../assets//img/dummy.jpg';
 export default function MovieDetails() {
     const [details, setDetails] = useState([]);
     const { id } = useParams();
+    const [loading, setLoading] = useState(true);
 
     const apiUrl = `https://api.themoviedb.org/3/movie/${id}?api_key=${
         import.meta.env.VITE_TMBD_API_KEY
@@ -26,9 +28,11 @@ export default function MovieDetails() {
 
     useEffect(() => {
         async function getData() {
+            setLoading(true);
             const { data } = await axios.get(apiUrl);
 
             setDetails(data);
+            setLoading(false);
         }
         getData();
     }, [apiUrl]);
@@ -46,23 +50,27 @@ export default function MovieDetails() {
         vote_average,
         vote_count,
     } = details;
+    const poster_url = poster_path ? `https://image.tmdb.org/t/p/w500/${poster_path}` : dummy;
 
-    console.log(details);
-
-    const poster_url = `https://image.tmdb.org/t/p/w500/${poster_path}`;
-
-    return (
-        <section className="flex flex-wrap justify-around  py-5 ">
+    return loading ? (
+        <div className="dark:text-slate-200 text-xl text-center ">Loading... </div>
+    ) : (
+        <section className="flex flex-wrap justify-around py-5 dark:text-slate-200 ">
             <div className="max-w-sm">
                 <img className="rounded" src={poster_url} alt="" />
             </div>
-            <div className="max-w-2xl mx-auto text-gray-700 my-5 ">
-                <h1 className="text-4xl dark:text-slate-200 font-bold">{original_title}</h1>
-                <p className="my-3 text-lg ">{overview}</p>
+            <div className="max-w-2xl mx-auto  dark:text-slate-200text-gray-700 my-5 ">
+                <h1 className="text-4xl text-center lg:text-left dark:text-slate-200 font-bold">
+                    {original_title}
+                </h1>
+                <p className="my-3 dark:text-slate-200 text-lg ">{overview}</p>
                 {genres ? (
                     <p className="flex flex-wrap gap-2">
                         {genres.map((genre) => (
-                            <span key={genre.id} className="text-lg border p-2 rounded">
+                            <span
+                                key={genre.id}
+                                className="text-lg dark:text-slate-200 dark:border-gray-500 border p-2 rounded"
+                            >
                                 {genre.name}
                             </span>
                         ))}
@@ -87,19 +95,19 @@ export default function MovieDetails() {
                         {vote_count} reviews
                     </span>
                 </div>
-                <p className="text-lg mt-2">
+                <p className="text-lg mt-2 dark:text-slate-200">
                     <span className="font-bold">Runtime : </span> {runtime} min.
                 </p>
-                <p className="text-lg mt-2">
+                <p className="text-lg mt-2 dark:text-slate-200">
                     <span className="font-bold">Budget : </span> {toUSD(budget)}
                 </p>
-                <p className="text-lg mt-2">
+                <p className="text-lg mt-2 dark:text-slate-200">
                     <span className="font-bold">Revenue : </span> {toUSD(revenue)}
                 </p>
-                <p className="text-lg mt-2">
+                <p className="text-lg mt-2 dark:text-slate-200">
                     <span className="font-bold">Relase Date : </span> {release_date}
                 </p>
-                <p className="text-lg mt-2">
+                <p className="text-lg mt-2 dark:text-slate-200">
                     <span className="font-bold">IMDB Code : </span> {imdb_id}
                 </p>
             </div>
